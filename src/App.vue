@@ -133,6 +133,27 @@ html
             comments: [
               {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
             ]
+          },
+          {
+            number: '201709272143-00-a',
+            name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
+            members: {
+              owner: ['足立', '品川'],
+              prime: ['文教', '新宿'],
+              ours: ['練馬', '板橋']
+            },
+            deadlines: {
+              estimate: { date: '10/10', done: true },
+              plan: { date: '10/15', done: true },
+              design: { date: '10/20', done: true },
+              build: { date: '10/25', done: false },
+              test: { date: '11/10', done: false },
+              release: { date: '11/15', done: false },
+              close: { date: '11/20', done: false }
+            },
+            comments: [
+              {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
+            ]
           }
         ],
         clipped: false,
