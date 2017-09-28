@@ -7,41 +7,62 @@ html
 
       main
         v-container(fluid)
-          v-layout.mb-2(row v-for="(project,i) in projects",:key="i")
+          v-layout.mb-4(row v-for="(project,i) in projects",:key="i")
             v-flex(d-flex xs3)
               v-layout(column)
-                v-flex
-                  v-card.blue-gray(dark)
+                v-flex(d-flex)
+                  v-card.blue.lighten-3
                     v-card-title.py-1: c(v-text="project.number")
                     v-card-text.py-1: h6(v-text="project.name")
-                v-flex
-                  v-card: v-card-title.py-0
-                    v-layout(row)
-                      v-flex(xs4): c a
-                      v-flex(xs3): c b
-                      v-flex(xs3): c c
-                      v-flex(xs3): c d
-                v-flex
-                  v-card: v-card-title.py-0
-                    v-layout(row)
-                      v-flex(xs4): c a
-                      v-flex(xs3): c b
-                      v-flex(xs3): c c
-                      v-flex(xs3): c d
-                v-flex
-                  v-card: v-card-title.py-0
-                    v-layout(row)
-                      v-flex(xs4): c a
-                      v-flex(xs3): c b
-                      v-flex(xs3): c c
-                      v-flex(xs3): c d
+                v-flex(d-flex)
+                  v-card.blue.lighten-4
+                    v-card-title.py-0
+                      v-layout(row)
+                        v-flex(xs6): c 関東地方
+                        v-flex(xs2): c 東京
+                        v-flex(xs2): c 埼玉
+                        v-flex(xs2): c 群馬
+                v-flex(d-flex)
+                  v-card.blue.lighten-4
+                    v-card-title.py-0
+                      v-layout(row)
+                        v-flex(xs6): c ★東北地方
+                        v-flex(xs2): c 青森
+                        v-flex(xs2): c 岩手
+                        v-flex(xs2): c 福島
+                v-flex(d-flex)
+                  v-card.blue.lighten-4
+                    v-card-title.py-0
+                      v-layout(row)
+                        v-flex(xs6): c 九州地方
+                        v-flex(xs2): c 福岡
+                        v-flex(xs2): c 宮崎
+                        v-flex(xs2): c 長崎
             v-flex(d-flex xs1)
               v-layout(column)
-                v-flex(d-flex v-for="(step,i) in steps",:key="i")
+                v-flex(d-flex)
+                  v-card.green.lighten-3
+                    v-card-text.py-0.px-1: c 見積　9/1　レ
+                v-flex(d-flex)
+                  v-card.green.lighten-3
+                    v-card-text.py-0.px-1: c 計画　9/12 レ
+                v-flex(d-flex)
+                  v-card.orange.lighten-3
+                    v-card-text.py-0.px-1: c 設計　9/20
+                v-flex(d-flex)
                   v-card
-                    v-card-text.py-0.px-1: c(v-text="step")
+                    v-card-text.py-0.px-1: c 試験
+                v-flex(d-flex)
+                  v-card
+                    v-card-text.py-0.px-1: c 稼働
+                v-flex(d-flex)
+                  v-card
+                    v-card-text.py-0.px-1: c 完了
+
             v-flex(d-flex xs4): v-card: v-card-text: h6 スケジュール
-            v-flex(d-flex xs4): v-card: v-card-text: h6 備考
+            v-flex(d-flex xs4): v-card
+              v-card-text.py-1: h6 備考
+              v-card-text.py-1: c(v-text="project.comments[0].body")
 </template>
 
 <script>
