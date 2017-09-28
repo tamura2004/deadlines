@@ -18,6 +18,7 @@
     "pug-loader": "^2.3.0",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
+    "vue2vis": "^0.0.8",
     "vuetify": "^0.15.7"
   },
   "devDependencies": {

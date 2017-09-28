@@ -6,165 +6,120 @@ html
         v-toolbar-title(v-text="title")
 
       main
-        v-container(fluid)
-          v-layout.mb-4(row v-for="(project,i) in projects",:key="i")
+        v-container
+          v-layout.mb-4.elevation-4(v-for="k in 10",:key="k")
             v-flex(d-flex xs3)
-              v-layout(column)
-                v-flex(d-flex)
-                  v-card.blue.lighten-3
-                    v-card-title.py-1: c(v-text="project.number")
-                    v-card-text.py-1: h6(v-text="project.name")
-                v-flex(d-flex)
-                  v-card.blue.lighten-4
-                    v-card-title.py-0
-                      v-layout(row)
-                        v-flex(xs6): c 関東地方
-                        v-flex(xs2): c 東京
-                        v-flex(xs2): c 埼玉
-                        v-flex(xs2): c 群馬
-                v-flex(d-flex)
-                  v-card.blue.lighten-4
-                    v-card-title.py-0
-                      v-layout(row)
-                        v-flex(xs6): c ★東北地方
-                        v-flex(xs2): c 青森
-                        v-flex(xs2): c 岩手
-                        v-flex(xs2): c 福島
-                v-flex(d-flex)
-                  v-card.blue.lighten-4
-                    v-card-title.py-0
-                      v-layout(row)
-                        v-flex(xs6): c 九州地方
-                        v-flex(xs2): c 福岡
-                        v-flex(xs2): c 宮崎
-                        v-flex(xs2): c 長崎
-            v-flex(d-flex xs1)
-              v-layout(column)
-                v-flex(d-flex)
-                  v-card.green.lighten-3
-                    v-card-text.py-0.px-1: c 見積　9/1　レ
-                v-flex(d-flex)
-                  v-card.green.lighten-3
-                    v-card-text.py-0.px-1: c 計画　9/12 レ
-                v-flex(d-flex)
-                  v-card.orange.lighten-3
-                    v-card-text.py-0.px-1: c 設計　9/20
-                v-flex(d-flex)
-                  v-card
-                    v-card-text.py-0.px-1: c 試験
-                v-flex(d-flex)
-                  v-card
-                    v-card-text.py-0.px-1: c 稼働
-                v-flex(d-flex)
-                  v-card
-                    v-card-text.py-0.px-1: c 完了
+              v-layout(wrap)
+                v-flex(d-flex xs12): v-card(dark).blue.darken-4
+                  v-card-text.py-1: c {{project.number}}
+                  v-card-text.py-1: h6 {{project.name}}
+                v-flex(d-flex xs12,v-for="group in project.groups",:key="group.area"): v-card.blue.lighten-4
+                  v-layout
+                    v-flex(xs5): v-card-text.py-0: c {{group.area}}
+                    v-flex(xs2,v-for="member in group.members",:key="member")
+                      v-card-text.pa-0: c {{member}}
 
-            v-flex(d-flex xs4): v-card: v-card-text: h6 スケジュール
-            v-flex(d-flex xs4): v-card
-              v-card-text.py-1: h6 備考
-              v-card-text.py-1: c(v-text="project.comments[0].body")
+            v-flex(d-flex xs2)
+              v-layout(wrap)
+                v-flex(d-flex,xs12,v-for="deadline in project.deadlines",:key="deadline.label"): v-card.px-2
+                  v-layout
+                    v-flex(xs2)
+                      v-icon(v-if="deadline.done").green--text.text--darken-2 done
+                      v-icon(v-else).red--text.text--darken-2 warning
+                    v-flex(xs6): v-card-text.pa-1: c {{deadline.label}}
+                    v-flex(xs4): v-card-text.pa-1: c {{deadline.date}}
+
+            v-flex(d-flex xs4)
+              v-layout(wrap)
+                v-flex(xs12)
+                  v-layout
+                    v-flex(v-for="m in 4",:key="m",xs2)
+                      p 10/{{m*7}}
+                    v-flex(v-for="m in 2",:key="m",xs2)
+                      p 11/{{m*7}}
+                v-flex(xs12)
+                  v-layout
+                    v-flex(offset-xs8 xs4)
+                      p.mb-1 ★締切
+                  v-layout
+                    v-flex(offset-xs2 xs6)
+                      p.mb-1 ヒアリング
+                      v-progress-linear.my-0(value="80",height="10",info)
+                v-flex(xs12)
+                  v-layout
+                    v-flex(offset-xs5 xs4)
+                      p.mb-1 積算
+                      v-progress-linear.my-0(value="20",height="10",error)
+            v-flex(d-flex xs3): v-card
+              v-card-text.py-0: c {{project.comment.date}}
+              v-card-text.py-0: c {{project.comment.body}}
+
 </template>
 
 <script>
   export default {
     data () {
       return {
-        steps: ['見積', '計画', '設計', '試験', '稼働', '完了'],
-        projects: [
-          {
-            number: '201709272143-00-a',
-            name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
-            members: {
-              owner: ['足立', '品川'],
-              prime: ['文教', '新宿'],
-              ours: ['練馬', '板橋']
+        project: {
+          number: '201709272143-00-a',
+          name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
+          groups: [
+            {
+              area: '関東地方',
+              members: ['東京', '埼玉', '千葉']
             },
-            deadlines: {
-              estimate: { date: '10/10', done: true },
-              plan: { date: '10/15', done: true },
-              design: { date: '10/20', done: true },
-              build: { date: '10/25', done: false },
-              test: { date: '11/10', done: false },
-              release: { date: '11/15', done: false },
-              close: { date: '11/20', done: false }
+            {
+              area: '★東北地方',
+              members: ['青森', '岩手', '福島']
             },
-            comments: [
-              {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
-            ]
-          },
-          {
-            number: '201709272143-00-a',
-            name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
-            members: {
-              owner: ['足立', '品川'],
-              prime: ['文教', '新宿'],
-              ours: ['練馬', '板橋']
+            {
+              area: '中国地方',
+              members: ['広島', '鳥取', '島根']
+            }
+          ],
+          deadlines: [
+            {
+              done: true,
+              label: '受注会議',
+              date: '10/10',
+              color: 'green'
             },
-            deadlines: {
-              estimate: { date: '10/10', done: true },
-              plan: { date: '10/15', done: true },
-              design: { date: '10/20', done: true },
-              build: { date: '10/25', done: false },
-              test: { date: '11/10', done: false },
-              release: { date: '11/15', done: false },
-              close: { date: '11/20', done: false }
+            {
+              done: true,
+              label: '開発会議',
+              date: '10/15',
+              color: 'green'
             },
-            comments: [
-              {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
-            ]
-          },
-          {
-            number: '201709272143-00-a',
-            name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
-            members: {
-              owner: ['足立', '品川'],
-              prime: ['文教', '新宿'],
-              ours: ['練馬', '板橋']
+            {
+              done: true,
+              label: '設計会議',
+              date: '10/20',
+              color: 'lime'
             },
-            deadlines: {
-              estimate: { date: '10/10', done: true },
-              plan: { date: '10/15', done: true },
-              design: { date: '10/20', done: true },
-              build: { date: '10/25', done: false },
-              test: { date: '11/10', done: false },
-              release: { date: '11/15', done: false },
-              close: { date: '11/20', done: false }
+            {
+              done: false,
+              label: '試験会議',
+              date: '10/25',
+              color: 'lime'
             },
-            comments: [
-              {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
-            ]
-          },
-          {
-            number: '201709272143-00-a',
-            name: 'Vuetifyjsを使ってマテリアルデザインでSPAを構築する',
-            members: {
-              owner: ['足立', '品川'],
-              prime: ['文教', '新宿'],
-              ours: ['練馬', '板橋']
+            {
+              done: false,
+              label: '稼働会議',
+              date: '10/30',
+              color: 'amber'
             },
-            deadlines: {
-              estimate: { date: '10/10', done: true },
-              plan: { date: '10/15', done: true },
-              design: { date: '10/20', done: true },
-              build: { date: '10/25', done: false },
-              test: { date: '11/10', done: false },
-              release: { date: '11/15', done: false },
-              close: { date: '11/20', done: false }
-            },
-            comments: [
-              {date: '9/27', body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時のために、“please don’t hesitate to contact me”という、より丁寧な表現も合わせて覚えておきましょう。'}
-            ]
+            {
+              done: false,
+              label: '完了会議',
+              date: '11/10',
+              color: 'deep-orange'
+            }
+          ],
+          comment: {
+            date: '9/27',
+            body: '口下手な性格のため、会議中に疑問点を聞き出すことが苦手なエンジニアも多いもの。そのため事後的に不明点を確認することを促すためにも上のようなフレーズを仕事で用いるようにするといいでしょう。また、ビジネスパートナーに対して「何なりと（自分に）お申し付けください」と表現したい時の'
           }
-        ],
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
+        },
         title: 'Deadlines'
       }
     }
