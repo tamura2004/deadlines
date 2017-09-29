@@ -6,7 +6,7 @@ html
         v-toolbar-title(v-text="title")
 
       main
-        v-container
+        v-container(fluid)
           v-layout.mb-4.elevation-4(v-for="k in 10",:key="k")
             v-flex(d-flex xs3)
               v-layout(wrap)
@@ -30,21 +30,22 @@ html
                     v-flex(xs4): v-card-text.pa-1: c {{deadline.date}}
 
             v-flex(d-flex xs4)
-              v-layout(wrap)
-                v-flex(xs12)
-                  v-layout
-                    v-flex(v-for="m in 4",:key="m",xs2)
-                      p 10/{{m*7}}
-                    v-flex(v-for="m in 2",:key="m",xs2)
-                      p 11/{{m*7}}
-                v-flex(xs12)
-                  v-layout
-                    v-flex(offset-xs8 xs4)
-                      p.mb-1 ★締切
-                  v-layout
-                    v-flex(offset-xs2 xs6)
-                      p.mb-1 ヒアリング
-                      v-progress-linear.my-0(value="80",height="10",info)
+              v-card
+                v-layout(wrap)
+                  v-flex(xs12)
+                    v-layout
+                      v-flex(v-for="m in 4",:key="m",xs2)
+                        p 10/{{m*7}}
+                      v-flex(v-for="m in 2",:key="m",xs2)
+                        p 11/{{m*7}}
+                  v-flex(xs12)
+                    v-layout
+                      v-flex(offset-xs8 xs4)
+                        p.mb-1 ★締切
+                    v-layout
+                      v-flex(offset-xs2 xs6)
+                        p.mb-1 ヒアリング
+                        v-progress-linear.my-0(value="80",height="10",info)
                 v-flex(xs12)
                   v-layout
                     v-flex(offset-xs5 xs4)
